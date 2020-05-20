@@ -14,6 +14,7 @@ def main():
     
     image = cv2.imread(args["dataset"])
     print(args["name"],image.shape)
+
     """
     cv2.imshow(image)
     cv2.waitKey(0)

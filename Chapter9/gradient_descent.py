@@ -13,6 +13,8 @@ def option():
                     help="Number of epochs")
     ap.add_argument("-a", "--alpha",type=float, default=0.01,
                     help="learning rate")
+    ap.add_argument("-o", "--output", required=True,
+                  help="path to the output loss/accuracy plot")
     args = vars(ap.parse_args())
     return args
 
@@ -34,13 +36,11 @@ def main():
     # generate a 2-class classification problem with 1,000 data points,
     # where each data point is a 2D feature vector
     (X, y) = make_blobs(n_samples=1000, n_features=2, centers=2,
-                        cluster_std=1.5, random_state=1)
-    print(X.shape)                  
+                        cluster_std=1.5, random_state=1)                  
     y  =  y.reshape((y.shape[0], 1))
 
     # insert a column of 1’s as the last entry in the feature matrix
     X = np.c_[X,np.ones((X.shape[0]))]
-    print(X.shape)
 
     # split training:75%, testing:25%
     (trainX, testX, trainY, testY) = train_test_split(X, y,
@@ -68,15 +68,16 @@ def main():
 
     # evaluate model
     print("[INFO] evaluating ...")
-    preds = predict(testY, W)
+    preds = predict(testX, W)
     print(classification_report(testY,preds))
-
+    
     # plot testing classification data
     plt.style.use("ggplot")
     plt.figure()
     plt.title("Data")
-    plt.scatter(testX[:,0], testX[:,1], maker="o", c=testY, s=30)
-
+    plt.scatter(testX[:,0], testX[:,1], marker="o", c=testY, s=30)
+    plt.savefig("Image1",args=["output"])
+    
     # construct a figure that plots the loss over time
     plt.style.use("ggplot")
     plt.figure()
@@ -84,7 +85,7 @@ def main():
     plt.title("Training Loss")
     plt.xlabel("Epoch #")
     plt.ylabel("Loss")
-    plt.show()
-
+    plt.savefig("Image2",args=["output"])
+    
 if __name__ == '__main__':
     main()

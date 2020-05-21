@@ -1,3 +1,5 @@
+""" use python Chapter9/regularization.py --dataset datasets/animal """
+
 from sklearn.linear_model import SGDClassifier
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
@@ -18,7 +20,7 @@ def option():
 def main():
     args = option()
     
-    # grab the líst of image path
+    # grab the list of image path
     print("[INFO] loading images ...")
     imagePaths = list(paths.list_images(args["dataset"]))
 
@@ -52,3 +54,6 @@ def main():
 	# evalute classifier
 	acc = model.score(testX,tesxtY)
 	print("[INFO] ‘{}‘ penalty accuracy: {:.2f}%".format(r,acc * 100))
+
+if __name__ == '__main__':
+    main()

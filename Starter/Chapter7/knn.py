@@ -1,3 +1,5 @@
+""" use python Chapter7/knn.py --dataset datasets/animals"""
+
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
@@ -10,7 +12,6 @@ from imutils import paths
 import argparse
 
 # construct the argument parse and parse the arguments
-
 def option():
     ap = argparse.ArgumentParser()
     ap.add_argument("-d", "--dataset",required=True, 

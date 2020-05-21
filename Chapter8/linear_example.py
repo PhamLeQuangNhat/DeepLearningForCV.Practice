@@ -1,3 +1,5 @@
+""" use python linear_example.py --dataset datasets/Image.png --output Chapter8/image.png """
+
 import cv2
 import numpy as np
 import argparse
@@ -6,14 +8,13 @@ def option():
 
     ap = argparse.ArgumentParser()
     ap.add_argument("-d", "--dataset", required=True, help="path to input image")
-    ap.add_argument("-n", "--name", type=str, required=False,default="Image")
     ap.add_argument("-o", "--output", required=True, help="path to oput image")
     args= vars(ap.parse_args())
     return args
 
 def main():
     args = option()
-    #print(args)
+    print(args)
     
     # initialize class labels and set the seed of the pseudoradom
     # number generator so we can reproduce our results
@@ -37,7 +38,7 @@ def main():
     
     # draw the label with the highest score on the image
     # as our prediction
-    org_image= cv2.putText(orig_image, "Label: {}".format(labels[np.argmax(scores)]),
+    org_image = cv2.putText(orig_image, "Label: {}".format(labels[np.argmax(scores)]),
                (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
     
     # save result 
@@ -45,4 +46,5 @@ def main():
     
 if __name__ == '__main__':
     main()
+
 

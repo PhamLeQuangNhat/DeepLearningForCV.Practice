@@ -1,3 +1,5 @@
+""" use python ArrayImage.py --dataset datasets/example.png """
+
 import cv2
 import argparse
 

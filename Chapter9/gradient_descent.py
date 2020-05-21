@@ -76,16 +76,17 @@ def main():
     plt.figure()
     plt.title("Data")
     plt.scatter(testX[:,0], testX[:,1], marker="o", c=testY, s=30)
-    plt.savefig("Image1",args=["output"])
+    plt.savefig("Image_gd1",args=["output"])
     
     # construct a figure that plots the loss over time
     plt.style.use("ggplot")
     plt.figure()
     plt.plot(np.arange(0, args["epochs"]), losses)
     plt.title("Training Loss")
-    plt.xlabel("Epoch #")
+    plt.xlabel("Epoch")
     plt.ylabel("Loss")
-    plt.savefig("Image2",args=["output"])
+    plt.savefig("Image_gd2",args=["output"])
     
 if __name__ == '__main__':
     main()
+

@@ -90,7 +90,7 @@ def main():
     print("[INFO] training network...")
     H = model.fit(trainX, trainY, validation_data=(testX, testY),
                             batch_size=32, epochs=40, verbose=1)
-                            
+                        
     # evaluate network
     print("[INFO] evaluating network...")
     preds = model.predict(testX)

@@ -1,4 +1,4 @@
-"""use python3 Chapter10/keras_cifar10.py --dataset datasets/cifar10/ --output Chapter10/image_cifar10.png"""
+"""use python Chapter10/keras_cifar10.py --dataset datasets/cifar10/ --output Chapter10/image_cifar10.png"""
 
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.metrics import classification_report
@@ -85,6 +85,7 @@ def main():
 
     # train model using SGD
     print("[INFO] training network...")
+    sgd = SGD(learning_rate=0.01)
     model.compile(loss="categorical_crossentropy", optimizer=sgd, 
                 metrics=["accuracy"])
     H = model.fit(trainX, trainY, validation_data=(testX,testY),
@@ -112,3 +113,4 @@ def main():
 if __name__== '__main__':
     main()
     
+

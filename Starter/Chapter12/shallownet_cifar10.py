@@ -3,11 +3,8 @@
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.metrics import classification_report
 
-from dataloader.simpledatasetloader import SimpleDatasetLoader
-from preprocessing.imagetoaraypreprocessor import ImageToArrayPreprocessor
-from preprocessing.simplepreprocessing import SimplePreprocessor
 from nn.conv.shallownet import ShallowNet
-
+from keras import backend as K 
 import argparse
 import matplotlib.pyplot as plt 
 from keras.optimizers import SGD
@@ -66,6 +63,14 @@ def main():
     trainX, trainY = load_data_train(args["dataset"])
     testX, testY = load_data_test(args["dataset"])
 
+    # reshape data matrix
+    if K.image_data_format() == "channels_first":
+        trainX = trainX.reshape(trainX.shape[0],3,32,32)
+        testX = testX.reshape(testX.shape[0],3,32,32)
+    else:
+        trainX = trainX.reshape(trainX.shape[0],32,32,3)
+        testX = testX.reshape(testX.shape[0],32,32,3)
+
     # scale trainX, testX into range [0,1]
     trainX = trainX.astype("float") / 255.0
     testX = testX.astype("float") / 255.0
@@ -100,10 +105,10 @@ def main():
     # plot training loss and accuracy
     plt.style.use("ggplot")
     plt.figure()
-    plt.plot(np.arange(0, 100), H.history["loss"], label="train_loss")
-    plt.plot(np.arange(0, 100), H.history["val_loss"], label="val_loss")
-    plt.plot(np.arange(0, 100), H.history["accuracy"], label="train_acc")
-    plt.plot(np.arange(0, 100), H.history["val_accuracy"], label="val_acc")
+    plt.plot(np.arange(0, 40), H.history["loss"], label="train_loss")
+    plt.plot(np.arange(0, 40), H.history["val_loss"], label="val_loss")
+    plt.plot(np.arange(0, 40), H.history["accuracy"], label="train_acc")
+    plt.plot(np.arange(0, 40), H.history["val_accuracy"], label="val_acc")
     plt.title("Training Loss and Accuracy")
     plt.xlabel("Epoch")
     plt.ylabel("Loss/Accuracy")

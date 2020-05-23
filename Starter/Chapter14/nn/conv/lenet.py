@@ -11,7 +11,7 @@ class LeNet:
     def build(width, height, depth, classes):
         # initialize model
         model = Sequential()
-        inputShape = (height, width, classes)
+        inputShape = (height, width, depth)
 
         # if we are using "channels first", update the input shape
         if K.image_data_format() == "channels_first":

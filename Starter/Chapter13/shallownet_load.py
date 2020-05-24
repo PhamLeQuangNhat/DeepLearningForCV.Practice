@@ -1,3 +1,5 @@
+"""use python Chapter13/shallownet_load.py --datatest Chapter13/datatest --model Chapter13/shallownet_weights.hdf5"""
+
 from preprocessing.imagetoaraypreprocessor import ImageToArrayPreprocessor
 from preprocessing.simplepreprocessing import SimplePreprocessor
 from dataloader.simpledatasetloader import SimpleDatasetLoader

@@ -23,7 +23,7 @@ def option():
                     help="path to input dataset")
     ap.add_argument("-o", "--output", required=True,
                 help="path to output loss/accuracy plot")
-    ap.add_argument("-o", "--model", required=True,
+    ap.add_argument("-m", "--model", required=True,
                 help="path to output model")
     args = vars(ap.parse_args())
     return args
@@ -93,5 +93,6 @@ def main():
 
 if __name__== '__main__':
     main()
+
 
 

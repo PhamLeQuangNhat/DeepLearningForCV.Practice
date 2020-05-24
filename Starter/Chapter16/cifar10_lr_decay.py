@@ -1,3 +1,5 @@
+"""use python Chapter16/cifar10_lr_decay.py --dataset datasets/cifar10/ --output Chapter16/image.png"""
+
 import matplotlib
 matplotlib.use("Agg")
 
@@ -10,21 +12,10 @@ from keras.callbacks import LearningRateScheduler
 from keras.optimizers import SGD 
 
 import matplotlib.pyplot as plt 
+import pickle
 import numpy as np 
 import argparse
 import os 
-
-def step_decay(epoch):
-    # initialize lr, drop factor, epoch to drop every
-    initAlpha = 0.01
-    factor = 0.25
-    dropEvery = 5
-
-    # compute learning rate for the current epoch
-    alpha = initAlpha*(factor**np.floor((1 + epoch) / dropEvery))
-
-    # return lr
-    return float(alpha)
 
 # read file 
 def unpickle(file):
@@ -59,6 +50,18 @@ def load_data_test(path):
 
     return (np.array(testX), np.array(testY))
 
+def step_decay(epoch):
+    # initialize lr, drop factor, epoch to drop every
+    initAlpha = 0.01
+    factor = 0.25
+    dropEvery = 5
+
+    # compute learning rate for the current epoch
+    alpha = initAlpha*(factor**np.floor((1 + epoch) / dropEvery))
+
+    # return lr
+    return float(alpha)
+
 # construct argument parse and parse arguments 
 def option():
     ap = argparse.ArgumentParser()
@@ -75,7 +78,7 @@ def main():
     # load training data and testing data 
     trainX, trainY = load_data_train(args["dataset"])
     testX, testY = load_data_test(args["dataset"])
-
+    
     # reshape data matrix
     if K.image_data_format() == "channels_first":
         trainX = trainX.reshape(trainX.shape[0],3,32,32)
@@ -131,8 +134,8 @@ def main():
     plt.legend()
     plt.savefig(args["output"])
     
-
 if __name__== '__main__':
     main()
     
+
 

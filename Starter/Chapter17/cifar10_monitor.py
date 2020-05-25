@@ -1,4 +1,5 @@
-"""use python3 Chapter15/minivggnet_cifar10.py --dataset datasets/cifar10/ --output Chapter15/image_cifar10.png"""
+"""use python Chapter17/cifar10_monitor.py --dataset datasets/cifar10 --output Chapter17/ """
+
 import matplotlib
 matplotlib.use("Agg")
 
@@ -104,12 +105,12 @@ def main():
     print("[INFO] training network...")
     H = model.fit(trainX, trainY, validation_data=(testX, testY),
                             batch_size=64, epochs=100, callbacks=callbacks, verbose=1)
-                        
+    """                 
     # evaluate network
     print("[INFO] evaluating network...")
     preds = model.predict(testX)
     print(classification_report(testY.argmax(axis=1),
                 preds.argmax(axis=1), target_names=labelNames))
-
+    """
 if __name__== '__main__':
     main()

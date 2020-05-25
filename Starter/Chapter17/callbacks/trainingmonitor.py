@@ -13,7 +13,7 @@ class TrainingMonitor(BaseLogger):
         self.jsonPath = jsonPath
         self.startAt = startAt
 
-    def on_train_batch(self, logs={}):
+    def on_train_begin(self, logs={}):
         # initialize history dictionary 
         self.H = {}
 
@@ -41,7 +41,7 @@ class TrainingMonitor(BaseLogger):
         # serialized to file 
         if self.jsonPath is not None:
             f  = open(self.jsonPath, "w")
-            f.write(json.dumps(self.H))
+            f.write(json.dumps(str(self.H)))
             f.close()
 
         # ensure at least two epochs have passed before plotting

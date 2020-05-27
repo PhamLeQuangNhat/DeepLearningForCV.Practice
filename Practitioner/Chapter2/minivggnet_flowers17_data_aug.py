@@ -1,4 +1,4 @@
-"""use python3 Chapter2/minivgg_flowers17.py --dataset datasets/flowers17/ --output Chapter2/image_no_aug.png"""
+"""use python3 Chapter2/minivgg_flowers17.py --dataset datasets/flowers17/ --output Chapter2/image_aug.png"""
 
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
@@ -10,6 +10,8 @@ from preprocessing.aspectawarepreprocessor import AspectAwarePreprocessor
 from dataloader.simpledatasetloader import SimpleDatasetLoader
 
 from keras.optimizers import SGD
+from keras.preprocessing.image import ImageDataGenerator
+
 from imutils import paths
 import matplotlib.pyplot as plt
 import numpy as np 
@@ -28,6 +30,11 @@ def option():
 
 def main():
     args = option()
+
+    # construct the image generator for data augmentation
+    aug = ImageDataGenerator(rotation_range=30, width_shift_range=0.1,
+            height_shift_range=0.1, shear_range=0.2, zoom_range=0.2,
+            horizontal_flip=True, fill_mode="nearest")
 
     # grab the list of images
     print("[INFO] loading images...")
@@ -65,8 +72,9 @@ def main():
     
     # train the network
     print("[INFO] training network...")
-    H = model.fit(trainX, trainY, validation_data=(testX, testY),
-                    batch_size=32, epochs=100, verbose=1)
+    H = model.fit_generator(aug.flow(trainX, trainY, batch_size=32),
+        validation_data=(testX, testY), steps_per_epoch=len(trainX) // 32,
+        epochs=100, verbose=1)
 
     # evaluate the network
     print("[INFO] evaluating network...")

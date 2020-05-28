@@ -3,15 +3,15 @@ from keras.applications import imagenet_utils
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import load_img
 
+from HDF5.hdf5datasetwriter import HDF5DatasetWriter
 from sklearn.preprocessing import LabelBinarizer
-from io.hdf5datasetwriter import HDF5DatasetWriter
-from imutils import paths
 
-import os
-import numpy as np 
+from imutils import paths
+import numpy as np
 import progressbar
 import argparse
 import random
+import os
 
 # construct the argument parse and parse the arguments
 def option():
@@ -103,6 +103,3 @@ def main():
 
 if __name__=='__main__':
     main()
-
-
-        

@@ -5,7 +5,7 @@ class AspectAwarePreprocessor:
     def __init__(self, width, height, inter=cv2.INTER_AREA):
         # store the target image width, height, and interpolation
         # method used when resizing
-        self.wight = width
+        self.width = width
         self.height = height
         self.inter = inter
 
@@ -27,11 +27,11 @@ class AspectAwarePreprocessor:
         # to crop along the width
         else:
             image = imutils.resize(image, height=self.height, inter=self.inter)
-            dW = int((image.shape[1] - self.wight) / 2.0)
+            dW = int((image.shape[1] - self.width) / 2.0)
         
         # re-grab the width and height, followed by performing the crop
         (h, w) = image.shape[:2]
-        image = imgae[dH:h - dH, dW:w - dW]
+        image = image[dH:h - dH, dW:w - dW]
 
         # resize the image to the provided spatial dimensions
         return cv2.resize(image, (self.width, self.height),interpolation=self.inter)
